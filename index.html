@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIXEL QUEST</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="screen">
+        <header class="topbar">
+            <div class="profile">
+                <div class="avatar" id="avatar">P</div>
+                <div>
+                    <small>PLAYER</small>
+                    <h3 id="playerName">Player One</h3>
+                    <span id="playerRank">BEGINNER ADVENTURER</span>
+                </div>
+                <button class="edit-btn" id="editName">EDIT</button>
+            </div>
+
+            <div class="top-stats">
+                <div class="stat">
+                    <small>LEVEL</small>
+                    <b id="highestLevel">01 / 15</b>
+                </div>
+                <div class="stat">
+                    <small>COINS</small>
+                    <b>🪙 <span id="totalCoins">0</span></b>
+                </div>
+                <button class="sound-btn" id="musicBtn" title="Music">♫</button>
+                <button class="sound-btn" id="soundBtn" title="Sound">🔊</button>
+            </div>
+        </header>
+
+        <main class="dashboard-content">
+            <div class="logo">
+                <small>WELCOME TO</small>
+                <h1>PIXEL QUEST</h1>
+                <p>JUMP • RUN • EXPLORE</p>
+            </div>
+
+            <div class="hero">
+                <canvas id="heroCanvas" width="72" height="100"></canvas>
+            </div>
+
+            <div class="main-actions">
+                <button class="play-btn" id="playBtn">▶ PLAY GAME</button>
+                <button class="continue-btn" id="continueBtn">CONTINUE GAME</button>
+                <button class="shop-open-btn" id="openShop">🛍 CHARACTER SHOP</button>
+            </div>
+
+            <div class="dashboard-footer">
+                <span>By AldooSKY26</span>
+                <span>15 WORLDS • 3 LIVES</span>
+            </div>
+        </main>
+    </section>
+
+    <!-- LEVEL SELECT -->
+    <section id="levelScreen" class="screen hidden">
+        <div class="level-header">
+            <button class="back-btn" id="backDashboard">← BACK</button>
+
+            <div class="level-title">
+                <h2>SELECT WORLD</h2>
+                <p>Choose your adventure</p>
+            </div>
+
+            <div class="level-progress">
+                <small>UNLOCKED</small>
+                <b id="unlockedCount">1 / 15</b>
+            </div>
+        </div>
+
+        <div class="level-grid" id="levelGrid"></div>
+
+        <div class="level-footer">
+            Complete a world to unlock the next one. Dapatkan ★★★ dengan ambil banyak koin &amp; tanpa mati!
+        </div>
+    </section>
+
+    <!-- SHOP -->
+    <section id="shopScreen" class="screen hidden">
+        <header class="shop-header">
+            <button class="back-btn" id="shopBack">← BACK</button>
+            <div>
+                <h2>CHARACTER SHOP</h2>
+                <p>Klik item untuk COBA dulu, baru beli</p>
+            </div>
+            <div class="shop-balance">🪙 <span id="shopCoins">0</span></div>
+        </header>
+
+        <div class="shop-content">
+            <div class="character-preview">
+                <canvas id="previewCanvas" width="160" height="220"></canvas>
+                <p id="tryStatus">SEDANG DIPAKAI</p>
+
+                <div class="preview-tools">
+                    <button class="mini-btn" id="rotateBtn">↺ PUTAR</button>
+                    <button class="mini-btn" id="walkBtn">🚶 JALAN</button>
+                </div>
+
+                <button class="mini-btn wide hidden" id="resetTryBtn">BATALKAN COBA</button>
+                <button class="wear-btn hidden" id="wearAllBtn">PAKAI SEMUA</button>
+            </div>
+
+            <div class="custom-section">
+                <h3>FREE SKIN COLOR</h3>
+                <p>Ganti warna kulit karaktermu, gratis.</p>
+                <div class="color-list" id="colorList"></div>
+
+                <h3 class="sub-title">FREE HAIR COLOR</h3>
+                <div class="color-list" id="hairList"></div>
+
+                <div class="shop-divider"></div>
+
+                <h3>ITEM COLLECTION</h3>
+                <p>Klik item untuk mencoba. Tombol BUY / EQUIP untuk memakai permanen.</p>
+                <div class="shop-tabs">
+                    <button class="shop-tab active" data-category="shirt">Baju</button>
+                    <button class="shop-tab" data-category="pants">Celana</button>
+                    <button class="shop-tab" data-category="hat">Topi</button>
+                    <button class="shop-tab" data-category="mask">Topeng</button>
+                    <button class="shop-tab" data-category="shoes">Sepatu</button>
+                    <button class="shop-tab" data-category="cape">Jubah</button>
+                </div>
+
+                <div class="shop-grid" id="shopGrid"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GAME -->
+    <section id="gameScreen" class="screen hidden">
+        <div class="game-topbar">
+            <button class="game-button" id="exitGame">← MENU</button>
+            <div class="game-info">
+                <span id="gameLevel">WORLD 1-1</span>
+                <span id="gameScore">COINS: 0</span>
+                <span id="gameLives">♥ ♥ ♥</span>
+            </div>
+            <button class="game-button" id="pauseBtn">Ⅱ PAUSE</button>
+        </div>
+
+        <div class="game-wrapper">
+            <canvas id="gameCanvas" width="480" height="270"></canvas>
+
+            <div id="touchControls">
+                <div class="direction-controls">
+                    <button id="leftBtn">◀</button>
+                    <button id="rightBtn">▶</button>
+                </div>
+                <button id="jumpBtn">▲</button>
+            </div>
+
+            <div class="game-message hidden" id="gameMessage">
+                <h2 id="messageTitle">PAUSED</h2>
+                <p id="messageText">Game sedang dijeda.</p>
+                <button id="resumeBtn">RESUME</button>
+                <button id="restartBtn">RESTART</button>
+                <button id="messageMenuBtn">DASHBOARD</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- NAME MODAL -->
+    <div class="modal hidden" id="nameModal">
+        <div class="modal-card">
+            <h2>CHANGE PLAYER NAME</h2>
+            <input type="text" id="nameInput" maxlength="16" placeholder="Enter your name">
+            <button id="saveName">SAVE NAME</button>
+            <button class="cancel-btn" id="cancelName">CANCEL</button>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+</div>
+
+<script src="game.js"></script>
+<script src="upgrade.js"></script>
+</body>
+</html>
